@@ -15,3 +15,36 @@ limitations under the License.
 */
 
 // TODO 3.8 - push a message using the web push library
+const webPush = require('web-push');
+
+const pushSubscription = {
+    "endpoint": "https://fcm.googleapis.com/fcm/send/clBagZHYVGc:APA91bFCUPqF-ueVNLBTmbnI-XWpiywMAGzYR3BcTHqlZr4k-5xJtuJqQepho8GeWeWbUZguQy7YzVI3fDZpImIolohzhNoFGdVFVcfiFYasjNbif38v_tyhf9drAfIB3bE3XGpW8KrA",
+    "expirationTime": null,
+    "keys": {
+        "p256dh": "BCnxbn1GPWLpFxtTtlQ3wyVKiU0LSQvShZ4mVaYbVOvfQSDJ3qRFpatNwwdNrVWzqGXII-xnVQbamc2ujv-OruM",
+        "auth": "G1xt1_Hp89ZTaiphX1ru3A"
+    }
+};
+
+// TODO 4.3a - include VAPID keys
+const vapidPublicKey = 'BL3W2STkeLPjbP3NE3Xz9Ec0oBlvnHSHsaFWHXXTq_MD7JGdUsWf1AtXhhNu42ZFkgz2HMbWOL96LfyxdVeyQmk';
+const vapidPrivateKey = 'Qdg2aVPpQ_eIg95KuXRop9YHk1Vi0IVlaUqfv8l4HLw';
+
+const payload = 'Here is a payload!';
+
+const options = {
+    TTL: 60,
+
+    // TODO 4.3b - add VAPID details
+    vapidDetails: {
+        subject: 'mailto: jean.christophe.vetter@gmail.com',
+        publicKey: vapidPublicKey,
+        privateKey: vapidPrivateKey
+    }
+};
+
+webPush.sendNotification(
+    pushSubscription,
+    payload,
+    options
+);
